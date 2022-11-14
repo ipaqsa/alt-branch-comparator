@@ -12,8 +12,9 @@ func inputString() string {
 	return strings.Replace(msg, "\n", "", -1)
 }
 
+//Begin is entry point in IO. Asks for branches`s name
 func Begin() (string, string) {
-	println("Hello!\nThis is CLI App for comparing packages from ALT REST API")
+	println("Hello!\nThis is app for comparing packages from different branches ALT Linux")
 	println("Enter first branch`s name")
 	firstName := inputString()
 	println("Enter second branch` name")
@@ -21,6 +22,7 @@ func Begin() (string, string) {
 	return firstName, secondName
 }
 
+//AddQuery allows you to enter arch params
 func AddQuery() string {
 	println("Do you want to add platform parameters?(y/n)")
 	ch := inputString()

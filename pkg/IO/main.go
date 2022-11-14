@@ -18,6 +18,26 @@ func Begin() (string, string) {
 	firstName := inputString()
 	println("Enter second branch` name")
 	secondName := inputString()
-	println("Good, please wait for a moment")
 	return firstName, secondName
+}
+
+func AddQuery() string {
+	println("Do you want to add platform parameters?(y/n)")
+	ch := inputString()
+	if ch == "y" {
+		println("Enter arches separated by commas")
+		arches := inputString()
+		archesSplitted := strings.Split(arches, ",")
+		query := "?"
+		for _, arch := range archesSplitted {
+			query += "arch=" + strings.TrimSpace(arch) + "&"
+		}
+		return query[:len(query)-1]
+	} else if ch == "n" {
+		return ""
+	} else {
+		println("Incorrect input")
+		println("Parameters wont be added")
+		return ""
+	}
 }

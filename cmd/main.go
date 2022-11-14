@@ -12,14 +12,17 @@ func init() {
 	}
 
 }
+
 func main() {
 	firstName, secondName := IO.Begin()
-	firstSetResponse, err := API.GetSet(firstName)
+	query := IO.AddQuery()
+	println("Good, please wait for a moment")
+	firstSetResponse, err := API.GetSet(firstName, query)
 	if err != nil {
 		println(err.Error())
 		return
 	}
-	secondSetResponse, err := API.GetSet(secondName)
+	secondSetResponse, err := API.GetSet(secondName, query)
 	if err != nil {
 		println(err.Error())
 		return

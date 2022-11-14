@@ -20,4 +20,5 @@ type Response struct {
 type Difference struct {
 	FirstUniqueArray  []Package `json:"first_unique_array"`
 	SecondUniqueArray []Package `json:"second_unique_array"`
+	VersionDifference []Package `json:"version_difference"`
 }

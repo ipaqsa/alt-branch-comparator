@@ -5,8 +5,8 @@ import (
 	"os"
 )
 
-func InSet(set map[Package]bool, pack Package) bool {
-	if _, ok := set[pack]; ok {
+func InSet(set map[string]Package, packName string) bool {
+	if _, ok := set[packName]; ok {
 		return true
 	}
 	return false
@@ -17,6 +17,8 @@ func (difference *Difference) Add(n int, pack Package) {
 		difference.FirstUniqueArray = append(difference.FirstUniqueArray, pack)
 	} else if n == 2 {
 		difference.SecondUniqueArray = append(difference.SecondUniqueArray, pack)
+	} else if n == 3 {
+		difference.VersionDifference = append(difference.VersionDifference, pack)
 	}
 }
 
@@ -31,18 +33,24 @@ func writeJSON(path string, difference interface{}) error {
 	return nil
 }
 
-func Compare(first, second map[Package]bool, path string) error {
+func Compare(first, second map[string]Package, path string) error {
 	var difference = &Difference{}
-	for pack, _ := range first {
-		if !InSet(second, pack) {
+	for name, pack := range first {
+		if !InSet(second, name) {
 			difference.Add(1, pack)
 		} else {
-			delete(second, pack)
+			if pack.Version > second[name].Version {
+				difference.Add(3, pack)
+			}
+			delete(second, name)
 		}
-		delete(first, pack)
+		delete(first, name)
 	}
-	for pack, _ := range second {
+	for _, pack := range second {
 		difference.Add(2, pack)
 	}
+	println("Unique elements in 1:", len(difference.FirstUniqueArray))
+	println("Unique elements in 2:", len(difference.SecondUniqueArray))
+	println("Elements with a difference version: ", len(difference.VersionDifference))
 	return writeJSON(path, difference)
 }

@@ -37,12 +37,6 @@ func newVersion(ver string) (version Version) {
 	return version
 }
 
-func SecondVersionLessFirst(v1, v2 string) bool {
-	vv1 := newVersion(v1)
-	vv2 := newVersion(v2)
-	return vv2.lessThan(vv1)
-}
-
 func (v Version) lessThan(v1 Version) bool {
 	return v.compare(v1) < 0
 }
@@ -137,4 +131,10 @@ func rpmvercmp(a, b string) int {
 		return 1
 	}
 	return -1
+}
+
+func SecondVersionLessFirst(v1, v2 string) bool {
+	vv1 := newVersion(v1)
+	vv2 := newVersion(v2)
+	return vv2.lessThan(vv1)
 }

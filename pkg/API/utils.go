@@ -3,6 +3,7 @@ package API
 import (
 	"encoding/json"
 	"os"
+	"test/pkg/VersionsComparator"
 )
 
 func InSet(set map[string]Package, packName string) bool {
@@ -39,9 +40,10 @@ func Compare(first, second map[string]Package, path string) error {
 		if !InSet(second, name) {
 			difference.Add(1, pack)
 		} else {
-			if pack.Version > second[name].Version {
+			if VersionsComparator.SecondVersionLessFirst(pack.Version, second[name].Version) {
 				difference.Add(3, pack)
 			}
+
 			delete(second, name)
 		}
 		delete(first, name)

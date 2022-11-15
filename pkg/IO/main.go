@@ -9,10 +9,11 @@ import (
 func inputString() string {
 	print(":> ")
 	msg, _ := bufio.NewReader(os.Stdin).ReadString('\n')
-	return strings.Replace(msg, "\n", "", -1)
+	prepared := strings.Replace(msg, "\n", "", -1)
+	return strings.Replace(prepared, "\r", "", -1)
 }
 
-//Begin is entry point in IO. Asks for branches`s name
+// Begin is entry point in IO. Asks for branches`s name
 func Begin() (string, string) {
 	println("Hello!\nThis is app for comparing packages from different branches ALT Linux")
 	println("Enter first branch`s name")
@@ -22,7 +23,7 @@ func Begin() (string, string) {
 	return firstName, secondName
 }
 
-//AddQuery allows you to enter arch params
+// AddQuery allows you to enter arch params
 func AddQuery() string {
 	println("Do you want to add platform parameters?(y/n)")
 	ch := inputString()

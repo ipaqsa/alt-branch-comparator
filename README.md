@@ -33,6 +33,7 @@ And there will be a json file in ./data/
 |   |-- API // pkg for request to API
 |   |-- logger // pkg for logging
 |   |-- IO // pkg for CLI control
+|   |-- VersionComprator// pkg for compare rpm versions
 |-- readme_assets // folder with files for README
 
 

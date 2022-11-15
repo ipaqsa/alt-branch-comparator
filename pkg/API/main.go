@@ -12,8 +12,8 @@ var errorLoggerAPI = logger.NewLogger("api-main", "ERROR")
 
 var Client = &http.Client{}
 
-//getData make HTTP Request to API, and decode result to Response struct.
-//Takes as arguments branch`s name, arch param and Response struct
+// getData make HTTP Request to API, and decode result to Response struct.
+// Takes as arguments branch`s name, arch param and Response struct
 func getData(name, query string, response interface{}) error {
 	template := "https://rdb.altlinux.org/api/export/branch_binary_packages/"
 	r, err := Client.Get(template + name + query)
@@ -30,7 +30,7 @@ func getData(name, query string, response interface{}) error {
 	return json.NewDecoder(r.Body).Decode(response)
 }
 
-//response make map from Response struct
+// response make map from Response struct
 func responseToSet(response *Response) map[string]Package {
 	SetResponse := make(map[string]Package)
 	for _, pkg := range response.Packages {
@@ -46,7 +46,11 @@ func GetSet(name, query string) (map[string]Package, error) {
 	err := getData(name, query, response)
 	if err != nil {
 		errorLoggerAPI.Printf("GetSet %s", err.Error())
-		return nil, err
+		response = &Response{}
+		err := getData(name, query, response)
+		if err != nil {
+			return nil, err
+		}
 	}
 	setResponse := responseToSet(response)
 	infoLoggerAPI.Printf("GetSet have done")

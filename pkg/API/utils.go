@@ -34,25 +34,25 @@ func writeJSON(path string, difference interface{}) error {
 	return nil
 }
 
-func Compare(first, second map[string]Package, path string) error {
+func Compare(firstname, secondname string, firstmap, secondmap map[string]Package, path string) error {
 	var difference = &Difference{}
-	for name, pack := range first {
-		if !InSet(second, name) {
+	for name, pack := range firstmap {
+		if !InSet(secondmap, name) {
 			difference.Add(1, pack)
 		} else {
-			if VersionsComparator.SecondVersionLessFirst(pack.Version, second[name].Version) {
+			if VersionsComparator.SecondVersionLessFirst(pack.Version, secondmap[name].Version) {
 				difference.Add(3, pack)
 			}
 
-			delete(second, name)
+			delete(secondmap, name)
 		}
-		delete(first, name)
+		delete(firstmap, name)
 	}
-	for _, pack := range second {
+	for _, pack := range secondmap {
 		difference.Add(2, pack)
 	}
-	println("Unique elements in 1:", len(difference.FirstUniqueArray))
-	println("Unique elements in 2:", len(difference.SecondUniqueArray))
+	println("Unique elements in %s:", firstname, len(difference.FirstUniqueArray))
+	println("Unique elements in %s:", secondname, len(difference.SecondUniqueArray))
 	println("Elements with a difference version: ", len(difference.VersionDifference))
 	return writeJSON(path, difference)
 }

@@ -24,13 +24,13 @@ You will see such a picture in case of completion
 <p align="center">
     <img src="./readme_assets/program.png" width="570" alt="">
 </p>
-And there will be a json file in ./data/
+And there will be a json file in result-dir
 <p align="center">
     <img src="./readme_assets/result.png" width="600" height="700" alt="">
 </p>
 
 ## Logs 
-Logs are stored in ```/var/log/altbranchcompare.d/"```
+Logs are stored in ```/var/log/altbranchcompare.d/```
 ## Project structure
 ```
 |-- cmd // folder with entry point(main.go)

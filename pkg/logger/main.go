@@ -9,12 +9,20 @@ import (
 )
 
 func NewLogger(object, typeLogger string) *log.Logger {
-	if !IO.Exists("./logs/") {
-		os.Mkdir("./logs/", os.ModePerm)
+	if !IO.Exists("/var/log/altbranchcompare.d") {
+		err := os.Mkdir("/var/log/altbranchcompare.d", os.ModePerm)
+		if err != nil {
+			println(err.Error())
+			os.Exit(-1)
+		}
 	}
-	logsDir := "./logs/" + object + "/"
+	logsDir := "/var/log/altbranchcompare.d/" + object + "/"
 	if IO.Exists(logsDir) == false {
-		os.Mkdir(logsDir, os.ModePerm)
+		err := os.Mkdir(logsDir, os.ModePerm)
+		if err != nil {
+			println(err.Error())
+			os.Exit(-1)
+		}
 	}
 	year, month, day := time.Now().Date()
 	filename := fmt.Sprintf("%v-%v-%v.log", day, month.String(), year)

@@ -2,9 +2,22 @@ package IO
 
 import (
 	"bufio"
+	"flag"
+	"fmt"
 	"os"
 	"strings"
 )
+
+var pathToBuild = ""
+var PathStatus = false
+
+func SetPathToBuild(path string) {
+	pathToBuild = path
+}
+
+func GetPathToBuild() string {
+	return pathToBuild
+}
 
 func inputString() string {
 	print(":> ")
@@ -13,9 +26,15 @@ func inputString() string {
 	return strings.Replace(prepared, "\r", "", -1)
 }
 
-// Begin is entry point in IO. Asks for branches`s name
+// Begin is entry point in IO. Asks for branches`s name and data directory
 func Begin() (string, string) {
-	println("Hello!\nThis is app for comparing packages from different branches ALT Linux")
+	println("This is app for comparing packages from different branches ALT Linux")
+	if !PathStatus {
+		println("Enter path to save result(without '/' at end)")
+		SetPathToBuild(inputString())
+	} else {
+		fmt.Printf("Result dir: %s\n", GetPathToBuild())
+	}
 	println("Enter first branch`s name")
 	firstName := inputString()
 	println("Enter second branch` name")
@@ -42,5 +61,17 @@ func AddQuery() string {
 		println("Incorrect input")
 		println("Parameters wont be added")
 		return ""
+	}
+}
+
+func PathFromArg() {
+	path := flag.String("p", "", "Enter path to result-dir(without / at end)")
+	flag.Parse()
+	fmt.Printf("path %s\n", *path)
+	if *path != "" {
+		if Exists(*path) {
+			PathStatus = true
+			SetPathToBuild(*path)
+		}
 	}
 }

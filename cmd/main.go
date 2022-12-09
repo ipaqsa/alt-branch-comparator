@@ -1,26 +1,27 @@
 package main
 
 import (
-	"os"
+	"fmt"
+	"test/pkg"
 	"test/pkg/API"
 	"test/pkg/IO"
 )
 
 func init() {
-	if !IO.Exists("./data/") {
-		os.Mkdir("./data/", os.ModePerm)
-	}
-
+	pkg.SetVersion("0.7.0")
+	IO.PathFromArg()
 }
 
 func main() {
+	fmt.Printf("ALT tool V-%s\n", pkg.GetVersion())
 	//Get names of the branches
+
 	firstName, secondName := IO.Begin()
 
 	//Get arch params
 	query := IO.AddQuery()
 
-	println("Good, please wait for a moment")
+	println("Good, please wait a couple of minutes\n")
 	//Make request to first branch
 	firstSetResponse, err := API.GetSet(firstName, query)
 	if err != nil {
@@ -36,8 +37,8 @@ func main() {
 	}
 
 	//Compare, save and print results
-	templatePath := "./data/difference_"
-	err = API.Compare(firstSetResponse, secondSetResponse, templatePath+firstName+"_"+secondName+".json")
+	templatePath := IO.GetPathToBuild() + "/difference_"
+	err = API.Compare(firstName, secondName, firstSetResponse, secondSetResponse, templatePath+firstName+"_"+secondName+".json")
 	if err != nil {
 		println(err.Error())
 		return

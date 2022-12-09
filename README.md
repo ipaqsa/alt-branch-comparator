@@ -2,6 +2,11 @@
 ## About the project.
 
 This is a CLI App for comparing binary packages from different branches ALTLinux API.
+
+URL for request:
+```
+ https://rdb.altlinux.org/api/export/branch_binary_packages
+```
 App is written using Golang.
 With the help of this app, you can make request to ALT API, and get a list of packages in two selected branches,
 then a file with a compression is formed from this list.
@@ -24,24 +29,26 @@ And there will be a json file in ./data/
     <img src="./readme_assets/result.png" width="600" height="700" alt="">
 </p>
 
+## Logs 
+Logs are stored in ```/var/log/altbranchcompare.d/"```
 ## Project structure
 ```
 |-- cmd // folder with entry point(main.go)
-|-- data // folder with json files
-|-- logs // folder with logs
 |-- pkg- // folder with pkg, that are used in the project
 |   |-- API // pkg for request to API
 |   |-- logger // pkg for logging
 |   |-- IO // pkg for CLI control
 |   |-- VersionComprator// pkg for compare rpm versions
 |-- readme_assets // folder with files for README
-
-
 ```
 
 ### Project setup
 ```
-go build ./cmd/main.go 
+make install (!!RUN FROM ROOT!!)
 ```
-#
-#### This application has been tested on Linux Ubuntu.
+### Flag
+```
+-p pathToResultDir(without '/' at end)
+```
+
+#### This application has been tested on Linux.

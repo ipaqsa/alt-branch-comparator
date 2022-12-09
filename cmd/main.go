@@ -1,10 +1,10 @@
 package main
 
 import (
+	"altComparator/pkg"
+	"altComparator/pkg/API"
+	"altComparator/pkg/IO"
 	"fmt"
-	"test/pkg"
-	"test/pkg/API"
-	"test/pkg/IO"
 )
 
 func init() {

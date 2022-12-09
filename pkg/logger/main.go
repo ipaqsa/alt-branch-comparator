@@ -1,10 +1,10 @@
 package logger
 
 import (
+	"altComparator/pkg/IO"
 	"fmt"
 	"log"
 	"os"
-	"test/pkg/IO"
 	"time"
 )
 

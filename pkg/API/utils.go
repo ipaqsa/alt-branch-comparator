@@ -1,9 +1,9 @@
 package API
 
 import (
+	"altComparator/pkg/VersionsComparator"
 	"encoding/json"
 	"os"
-	"test/pkg/VersionsComparator"
 )
 
 func InSet(set map[string]Package, packName string) bool {

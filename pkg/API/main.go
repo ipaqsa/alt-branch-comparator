@@ -1,10 +1,10 @@
 package API
 
 import (
+	"altComparator/pkg/logger"
 	"encoding/json"
 	"errors"
 	"net/http"
-	"test/pkg/logger"
 )
 
 var infoLoggerAPI = logger.NewLogger("api-main", "INFO")

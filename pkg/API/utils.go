@@ -45,6 +45,7 @@ func Compare(firstname, secondname string, firstmap, secondmap map[string]Packag
 			}
 
 			delete(secondmap, name)
+
 		}
 		delete(firstmap, name)
 	}

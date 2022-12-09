@@ -16,7 +16,7 @@ With the help of received json file, you can find out:
 3. In which packages of the first branch the version is greater than in the packages of second branch
 
 ## How to use
-Build and run app. You will see a greeting, and you will be asked to enter the of the branches.
+Build and run app. You will see a greeting, and you will be asked to enter the of the branches(or result-dir, if you dont set flag -p).
 Also, you can enter arch params(optional)
 Then you have to wait for the program to finish.
 

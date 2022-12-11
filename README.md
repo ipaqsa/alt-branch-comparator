@@ -29,8 +29,6 @@ And there will be a json file in result-dir
     <img src="./readme_assets/result.png" width="600" height="700" alt="">
 </p>
 
-## Logs 
-Logs are stored in ```/var/log/altbranchcompare.d/```
 ## Project structure
 ```
 |-- cmd // folder with entry point(main.go)
@@ -49,6 +47,7 @@ make install (!!RUN FROM ROOT!!)
 ### Flag
 ```
 -p pathToResultDir(without '/' at end)
+-d debug info
 ```
 
 #### This application has been tested on Linux.

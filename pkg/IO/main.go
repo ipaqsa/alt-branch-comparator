@@ -2,14 +2,12 @@ package IO
 
 import (
 	"bufio"
-	"flag"
 	"fmt"
 	"os"
 	"strings"
 )
 
 var pathToBuild = ""
-var PathStatus = false
 
 func SetPathToBuild(path string) {
 	pathToBuild = path
@@ -61,17 +59,5 @@ func AddQuery() string {
 		println("Incorrect input")
 		println("Parameters wont be added")
 		return ""
-	}
-}
-
-func PathFromArg() {
-	path := flag.String("p", "", "Enter path to result-dir(without / at end)")
-	flag.Parse()
-	fmt.Printf("path %s\n", *path)
-	if *path != "" {
-		if Exists(*path) {
-			PathStatus = true
-			SetPathToBuild(*path)
-		}
 	}
 }

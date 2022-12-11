@@ -8,8 +8,9 @@ import (
 )
 
 func init() {
-	pkg.SetVersion("0.7.0")
-	IO.PathFromArg()
+	pkg.SetVersion("0.7.1")
+	IO.ArgsParse()
+	API.CreateLoggers()
 }
 
 func main() {
@@ -21,7 +22,7 @@ func main() {
 	//Get arch params
 	query := IO.AddQuery()
 
-	println("Good, please wait a couple of minutes\n")
+	println("Good, please wait a couple of minutes:\n")
 	//Make request to first branch
 	firstSetResponse, err := API.GetSet(firstName, query)
 	if err != nil {

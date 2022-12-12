@@ -1,4 +1,4 @@
-# ALTComparing
+# Alt Branch Comparator
 ## About the project.
 
 This is a CLI App for comparing binary packages from different branches ALTLinux API.
